@@ -1,0 +1,12 @@
+% delaepep.def - studies and research plan definitions
+% Copyright (C) 2004..2016 Walter Fetter Lages <fetter@ece.ufrgs.br>
+%
+% This file was adapted from the similar one in iiufrgs-4.2.0 package.
+%
+% This is free software, distributed under the GNU GPL; please take
+% a look in `delaetex.cls' to see complete information on using, copying
+% and redistributing these files
+%
+\ProvidesFile{delaepep.def}[2016/03/16 v2.0.0 DeLaeTeX Studies and Research Plan]
+\newcommand{\titlepagespecificinfo}{\pepspecificinfo}
+\course{\ppgee}

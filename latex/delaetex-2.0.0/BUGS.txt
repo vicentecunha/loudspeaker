@@ -1,0 +1,3 @@
+Lista de bugs do pacote DeLaeTeX
+===============================
+

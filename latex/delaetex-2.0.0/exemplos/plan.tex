@@ -1,0 +1,411 @@
+\documentclass{delaeplan}
+\usepackage[latin1]{inputenc}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{url}
+
+\date{2006/1}
+\course{ENG04476--Microprocessadores II}
+\credits{5}
+\type{Eletiva}
+\regent{Prof. Walter Fetter Lages}
+\theory{3 horas teóricas, Prof. Walter Fetter Lages}
+\lab{2 horas práticas, Prof. Altamiro Amadeu Susin}
+%\exercise{0 horas de exercício, Ninguém}
+\prereq{ENG04475--Microprocessadores I}
+\schedule{Turma A}{2091/301--2102/114--6142/301}
+\schedule{Turma B}{2091/301--5152/114--6142/301}
+
+\begin{document}
+
+\maketitle
+
+\section{Súmula}
+
+Adaptadores de interface programáveis. Dispositivos periféricos. Barramentos
+padronizados. Sistemas de desenvolvimento, montadores, ligadores, sistemas
+operacionais e de comunicações. Projeto lógico e elétrico de sistemas.
+
+\section{Objetivos da Disciplina}
+
+\begin{itemize}
+
+\item Apresentar arquiteturas de microprocessadores de 16/32 bits e circuitos
+integrados auxiliares.
+
+\item Detalhar os circuitos integrados controladores de periféricos mais
+comuns.
+
+\item Estudar barramentos padronizados mais usuais.
+
+\item Familiarizar os alunos com ambientes de desenvolvimento de {\it
+hardware} e {\it software}.
+
+\item Preparar o aluno para compreender e desenvolver sistemas
+microprocessados complexos, contendo um ou mais microprocessadores e
+controladores de periféricos
+
+\end{itemize}
+
+\section{Metodologia de Ensino}
+
+Aulas teóricas expositivas com o auxílio de recursos áudio-visuais e
+demonstrações dos tópicos abordados. Exercícios de projeto de
+arquiteturas com microprocessador e periféricos.
+
+Aulas de laboratório, em grupos, onde serão desenvolvidos programas
+utilizando os dispositivos apresentados nas aulas teóricas, utilizando
+ambientes de desenvolvimento e kits de desenvolvimento ou protótipos
+desenvolvidos pelos alunos. Observação dos sinais do sistema com a
+utilização de osciloscópio ou analizador lógico.
+
+\section{Sistema de Avaliação}
+
+Serão realizadas duas provas individuais ($P_1$ e $P_2$). Além disso, os
+alunos deverão elaborar um projeto prático que deverá ser demonstrado e do
+qual deverão ser elaborados dois relatórios parciais ($R_1$ e $R_2$) e um
+relatório final ($R_F$). Alunos que obtiverem média $M \geq 6.0$ serão
+aprovados com nota final igual a $M$, sendo
+
+$$
+M=\frac{3P_1+3P_2+R_1+R_2+R_F}{9}
+$$
+
+Alunos com $M < 6.0$ deverão fazer exame. Neste caso, a nota final será dada
+por
+
+$$
+N_F=\frac{M+N_E}{2}
+$$
+
+\noindent onde $N_E$ é a nota do exame. 
+
+O conceito será atribuído conforme a tabela~\ref{tab:conc}.
+
+\begin{table}[H]
+\begin{center}
+\caption{Atribuição dos Conceitos.}
+\label{tab:conc}
+\begin{tabular}{ll}
+\hline \hline
+Conceito A	&	$8.5 \le N_F \le 10.0$\\
+Conceito B	&	$7.0 \le N_F < 8.5$\\
+Conceito C	&	$6.0 \le N_F < 7.0$\\
+Conceito D	&	$N_F < 6.0$\\
+Conceito FF	&	Falta de frequência\\
+\hline \\
+\end{tabular}
+\end{center}
+\end{table}
+
+Será reprovado por Falta de Freqüência (FF), o aluno que tiver freqüência
+inferior a 75\%, das aulas ministradas no semestre, de acordo com o \emph{
+Regimento Geral da Universidade (RGU), Art. 134}, "É obrigatória a
+freqüência dos alunos às atividades didáticas, considerando-se reprovado
+aquele que, ao término do período letivo, houver deixado de freqüentar mais
+de 25\% (vinte e cinco por cento) da carga horária prevista no plano da
+disciplina".
+
+\section{Atendimento aos Alunos}
+
+O horário reservado para atendimento aos alunos é terças-feiras das 10:00 às
+12:00. Na impossibilidade de comparecerem neste horário, os alunos deverão
+solicitar o agendamento de outro horário pelos e-mails:
+\url{<fetter@ece.ufrgs.br>} ou \url{<altamiro@ece.ufrgs.br>}.
+
+\section{Observações}
+
+O laboratórios serão realizados em grupos de no máximo 3 alunos. Para tanto,
+cada grupo receberá uma conta com senha no sistema do laboratório. Estas
+contas poderão ser acessadas através de qualquer computador do laboratório e
+são de uso exclusivo de cada grupo. A má utilização destas contas será
+responsabilidade do grupo, e será punida conforme as regras previstas na
+política para recursos computacionais da UFRGS.
+
+Adicionalmente, cada aluno também terá uma conta no sistema Claroline em
+\url{<http://www.ece.ufrgs.br/claroline/ENG04476>}. Além da sua conta
+individual, os alunos também serão associados em grupos conforme os grupos
+de laboratório. Este sistema deverá ser utilizado para submissão dos
+relatórios parciais e final do projeto. Não serão aceitos relatórios que não
+sejam submetidos através deste sistema.
+
+\bibliographystyle{abbrv}
+\bibliography{plan}
+
+\nocite{Anderson:USB-1997}
+\nocite{Buchanan:CB-2000}
+\nocite{IBM:PCA-1985}
+\nocite{Phoenix:SBI-1990}
+\nocite{Sargent:IIO-1995}
+\nocite{Shanley:EIS-1993}
+\nocite{Shanley:PCI-1994} 
+\nocite{Stevens:APU-1993}
+\nocite{Zelenovsky:PCG-2002}
+\nocite{Lages:ENG04476}
+
+\section{Conteúdo Programático}
+
+\begin{enumerate}
+
+\item Microprocessadores de 16/32 bits
+
+\begin{enumerate}
+
+\item Conceitos
+
+\begin{enumerate}
+\item Modo protegido
+\item Segmentação de memória
+\item Paginação de memória e Memória virtual
+\item Máquina virtual
+\end{enumerate}
+
+\item Microprocessadores da família 80x86
+\end{enumerate}
+
+\item Memórias
+\begin{enumerate}
+\item SRAM
+\item DRAM: FPM-DRAM, EDO-DRAM, BEDO-DRAM, SDRAM, DDR-SDRAM, DR-DRAM
+\item VRAM
+\item Memória cache
+\end{enumerate}
+
+\item {\it Chips} periféricos
+
+\begin{enumerate} 
+\item Interface paralela programável 8255
+\item Temporizadores programáveis 8253 e 8254
+\item Interfaces seriais 8250, 14550, 16550 e 16550A
+\item Controlador de interrupções 8259
+\item Controladores de DMA 8237 e 82237
+\item Controlador de periféricos integrados 82091AA
+\end{enumerate}
+
+\item Barramentos
+
+\begin{enumerate}
+\item Barramentos síncronos
+\item Barramentos assíncronos
+\item Barramentos baseados em {\it Bridge}
+
+\item Barramentos padronizados
+\begin{enumerate}
+\item ISA, EISA e VLB
+\item PCI e AGP
+\item RS-232, USB e IEEE-1394
+\item IEEE-1284
+\end{enumerate}
+
+\end{enumerate}
+
+\item Arquitetura dos computadores compatíveis com IBM-PC
+
+\item Ambiente de desenvolvimento
+\begin{enumerate}
+\item Compiladores
+\item Montadores
+\item {\it Linkers}
+\item Gerenciadores de bibliotecas
+\item Depuradores
+\end{enumerate}
+
+\item Interface entre {\it Hardware}, sistema operacional e {\it software
+aplicativo} 
+
+\end{enumerate}
+
+
+\section{Cronograma}
+
+\begin{center}
+%\begin{tabular}{||c|c|l||}
+\begin{longtable}{||c|c|p{0.7\textwidth}||}
+\caption{Cronograma}
+\endfirsthead
+\caption{Cronograma (...Continuação)}\\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{(Continua...)}
+\endfoot
+\endlastfoot
+\hline\hline
+Semana & Data & Conteúdo Previsto\\
+\hline
+\multirow{4}{1cm}{1} & 06/03/2006 & Apresentação, histórico\\
+\cline{2-3}
+  & 06/03/2006 & \multirow{2}{0.7\textwidth}{Lab. 1: Familiarização com o Linux}\\
+\cline{2-2}
+  & 09/03/2006 &\\
+\cline{2-3}
+  & 10/03/2006 & Arquitetura do 8086\\
+\hline
+
+\multirow{4}{1cm}{2} & 13/03/2006 & Ambiente de desenvolvimento\\
+\cline{2-3}
+  & 13/03/2006 & \multirow{2}{0.7\textwidth}{Lab. 2: Ambiente de desenvolvimento}\\
+\cline{2-2}
+  & 16/03/2006 &\\
+\cline{2-3}
+  & 17/03/2006 & Segmentação de memória e memória virtual\\
+\hline
+
+\multirow{4}{1cm}{3} & 20/03/2006 & Programação em Assembly\\
+\cline{2-3}
+  & 20/03/2006 & \multirow{2}{0.7\textwidth}{Lab. 3: Arquitetura do 80x86 e programação em Assembly}\\
+\cline{2-2}
+  & 23/03/2006 &\\
+\cline{2-3}
+  & 24/03/2006 & Arquitetura IA-32\\
+\hline
+
+\multirow{4}{1cm}{4} & 27/03/2006 & Programação em C e convenções de chamada de C\\
+\cline{2-3}
+  & 27/03/2006 & \multirow{2}{0.7\textwidth}{Lab. 4: Programação em C com rotinas em Assembly}\\
+\cline{2-2}
+  & 30/03/2006 &\\
+\cline{2-3}
+  & 31/03/2006 & Memórias Dinâmicas\\
+
+\hline
+\multirow{4}{1cm}{5} & 03/04/2006 & Programação em C\\
+\cline{2-3}
+  & 03/04/2006 & \multirow{2}{0.7\textwidth}{Lista de projetos}\\
+\cline{2-2}
+  & 06/04/2006 &\\
+\cline{2-3}
+  & 07/04/2006 & Memória cache e mapeamento de I/O e memória\\
+\hline
+
+\multirow{4}{1cm}{6} & 10/04/2006 & Programação em modo protegido\\
+\cline{2-3}
+  & 10/04/2006 & \multirow{2}{0.7\textwidth}{Lab. 5: Programação em modo protegido}\\
+\cline{2-2}
+  & 13/04/2006 &\\
+\cline{2-3}
+  & 14/04/2006 & Sexta feira da Paixão\\
+\hline
+
+\multirow{4}{1cm}{7} & 17/04/2006 & Programação em C\\
+\cline{2-3}
+  & 17/04/2006 & \multirow{2}{0.7\textwidth}{Propostas de projeto}\\
+\cline{2-2}
+  & 20/04/2006 &\\
+\cline{2-3}
+  & 21/04/2006 & Tiradentes\\
+\hline
+
+\multirow{4}{1cm}{8} & 24/04/2006 & Acesso a memória e I/O em modo protegido\\
+\cline{2-3}
+  & 24/04/2006 & \multirow{2}{0.7\textwidth}{Lab. 8: Acesso a memória e I/O em modo protegido}\\
+\cline{2-2}
+  & 27/04/2006 &\\
+\cline{2-3}
+  & 28/04/2006 & Barramentos ISA, EISA e VLB\\
+
+
+\hline
+\multirow{4}{1cm}{9} & 1\textsuperscript{\underline o}/05/2006 & Dia Internacional do Trabalho\\
+\cline{2-3}
+  & 1\textsuperscript{\underline o}/05/2006 & \multirow{2}{0.7\textwidth}{Dia Internacional do Trabalho}\\
+\cline{2-2}
+  & 04/05/2006 &\\
+\cline{2-3}
+  & 05/05/2006 & Interface paralela programável 8255 e porta paralela\\
+\hline
+
+\multirow{4}{1cm}{10} & 08/05/2006 & IEEE-1284\\
+\cline{2-3}
+  & 08/05/2006 & \multirow{2}{0.7\textwidth}{Lab. 9: IEEE-1284, \emph{ Entrega do 1\textsuperscript{\underline o} relatório do projeto - Esquemáticos}}\\
+\cline{2-2}
+  & 11/05/2006 &\\
+\cline{2-3}
+  & 12/05/2006 & 1\textsuperscript{\underline a} Prova\\
+\hline
+
+\multirow{4}{1cm}{11} & 15/05/2006 & Semana Acadêmica\\
+\cline{2-3}
+  & 15/05/2006 & Semana Acadêmica\\
+\cline{2-2}
+  & 18/05/2006 & Semana Acadêmica\\
+\cline{2-3}
+  & 19/05/2006 & Semana Acadêmica\\
+\hline
+
+\multirow{4}{1cm}{12} & 22/05/2006 & Drivers\\
+\cline{2-3}
+  & 22/05/2006 & \multirow{2}{0.7\textwidth}{Lab. 10: Drivers}\\
+\cline{2-2}
+  & 25/05/2006 &\\
+\cline{2-3}
+  & 26/05/2006 & Temporizadores 8253 e 8254\\
+
+
+\hline
+\multirow{4}{1cm}{13} & 29/05/2006 & Acesso a temporizadores\\
+\cline{2-3}
+  & 29/05/2006 & \multirow{2}{0.7\textwidth}{Lab. 11: Temporizadores 8253 e 8254}\\
+\cline{2-2}
+  & 1\textsuperscript{\underline o}/06/2006 &\\
+\cline{2-3}
+  & 02/06/2006 & Interfaces seriais 8250, 14550, 16550A e RS-232\\
+\hline
+
+\multirow{4}{1cm}{14} & 05/06/2006 & Acesso a porta serial\\
+\cline{2-3}
+  & 05/06/2006 & \multirow{2}{0.7\textwidth}{Lab. 12: Interface serial 16550A}\\
+\cline{2-2}
+  & 08/06/2006 &\\
+\cline{2-3}
+  & 09/06/2006 & Controlador de interrupções 8259\\
+\hline
+
+\multirow{4}{1cm}{15} & 12/06/2006 & Tratamento de interrupções\\
+\cline{2-3}
+  & 12/06/2006 & \multirow{2}{0.7\textwidth}{Corpus Christi}\\
+\cline{2-2}
+  & 15/06/2006 &\\
+\cline{2-3}
+  & 16/06/2006 & Controladores de DMA 8237 e 82237\\
+\hline
+
+\multirow{4}{1cm}{16} & 19/06/2006 & Tratamento de interrupções\\
+\cline{2-3}
+  & 19/06/2006 & \multirow{2}{0.7\textwidth}{Lab. 13: Controlador de interrupções 8259, \emph{Entrega do 2\textsuperscript{\underline o} relatório do projeto - {\it Hardware pronto}}}\\
+\cline{2-2}
+  & 22/06/2006 &\\
+\cline{2-3}
+  & 23/06/2006 & Barramentos PCI, AGP e APIC\\
+\hline
+
+\multirow{4}{1cm}{17} & 26/06/2006 & Transferências de DMA\\
+\cline{2-3}
+  & 26/06/2006 & \multirow{2}{0.7\textwidth}{Lab. 14: Controlador de DMA 8237A}\\
+\cline{2-2}
+  & 29/06/2006 &\\
+\cline{2-3}
+  & 30/06/2006 & 2\textsuperscript{\underline a} Prova\\
+\hline
+
+\multirow{4}{1cm}{18} & 03/07/2006 & Resolução de dúvidas\\
+\cline{2-3}
+  & 03/07/2006 & \multirow{2}{0.7\textwidth}{Apresentação e entrega do relatório final do projeto}\\
+\cline{2-2}
+  & 06/07/2006 &\\
+\cline{2-3}
+  & 07/07/2006 & Exame\\
+\hline
+
+\multirow{4}{1cm}{19} & 10/07/2006 & Publicação dos conceitos\\
+\cline{2-3}
+  & 10/07/2006 & \multirow{2}{0.7\textwidth}{Revisão de conceitos}\\
+\cline{2-2}
+  & 13/07/2006 & \\
+\hline\hline
+%\end{tabular}
+\end{longtable}
+\end{center}
+
+\end{document}

@@ -1,0 +1,30 @@
+Criar estilo para o plano de trabalho e relatorio do estagio docencia.
+
+Alterar a fonte dos ambientes \chapter e \chapter* para alguma fonte com
+seriff.
+
+Remover definitivamente o CIP e a nominata, ou deixa-los comentados para
+quando e se forem incluidos no padrao do PPGEE?
+
+Remover tipos de monografias inexistentes no DELAE ou deixa-las comentadas
+para se forem necessarias no futuro? Deixa-las funcionais mas nao
+documentadas?
+
+Incluir instrucoes para instalacao no MikTeX.
+Esboco:
+1 - descompactar deletex docs/latex_files/deletex
+2 - descompactar bibtex docs/latex_files/bibant
+
+criar miktex/tex/latex/delaetex
+copiar inputs para la'
+
+miktex, settings Tab General Refresh FNDB
+
+criar miktex/bibtex/bst/delaeabnt
+copiar delaeabnt/*.bst para la'
+
+miktex, settings Tab General Refresh FNDB
+
+habilitar hifenizacao em portugues
+
+Suportar pdflatex?

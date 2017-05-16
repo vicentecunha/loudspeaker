@@ -1,0 +1,49 @@
+% spf.tex - Exemplo de uso da classe delaetter.cls com a opcao spf
+% Copyright (C) 2005..2016 Walter Fetter Lages <fetter@ece.ufrgs.br>
+%
+% This file was adapted from:
+% spf.tex - Exemplo de uso da classe deletter.cls com a opcao spf
+% Copyright (C) 2005 Walter Fetter Lages <w.fetter@ieee.org>
+%
+% iiletter.tex - exemplo de carta padrao do II/UFRGS
+% $Id: iiletter.tex,v 4.1 2002/12/07 17:16:05 utug Exp $
+% Copyright (C) 2001 UFRGS TeX Users Group
+%
+% This is free software, distributed under the GNU GPL; please take
+% a look in `iiufrgs.cls' to see complete information on using, copying
+% and redistributing these files
+%
+%\documentclass{delaeltter}
+
+% Para cartas em inglês, deve-se utilizar a opcao english:
+% \documentclass[english]{delaeletter}
+
+% Para cartas promocionais, isto é, não oficiais, deve-se utilizar
+% o logo ao invés do brasão da UFRGS. Isto é obtido com a utilização da
+% opção promo:
+% \documentclass[promo]{delaeletter}
+
+% Para documentos padrao do Servico Publico Federal, com o brasao de armas
+% da republica ao inves do braso ou logo da UFRGS deve-se utilizar a opcao
+% spf:
+\documentclass[spf]{delaeletter}
+
+\usepackage[latin1]{inputenc}
+
+\signature{Leslie Lamport}
+
+\begin{document}
+
+\begin{letter}{Prof.~Dr.~Donald E. Knuth\\Grande Criador do \TeX\\Stanford University\\Estados Unidos}
+
+\opening{Caro Mestre,}
+	Envio-lhe, por meio desta, um especial agradecimento por ter inventado o \TeX, para que eu pudesse inventar o \LaTeX. Repito, a seguir, o mesmo parágrafo, para que a carta tenha uma aparência melhor.
+
+	Envio-lhe, por meio desta, um especial agradecimento por ter inventado o \TeX, para que eu pudesse inventar o \LaTeX. Repito, a seguir, o mesmo parágrafo, para que a carta tenha uma aparência melhor.
+
+	Envio-lhe, por meio desta, um especial agradecimento por ter inventado o \TeX, para que eu pudesse inventar o \LaTeX.
+
+\closing{Atenciosamente,}
+\end{letter}
+
+\end{document}

@@ -1,0 +1,17 @@
+% delaedipl-ecp.def - graduation report definitions
+% Copyright (C) 2005..2016 Walter Fetter Lages <fetter@ece.ufrgs.br>
+%
+% This file was adapted from the similar one in iiufrgs-4.2.0 package.
+%
+% This is free software, distributed under the GNU GPL; please take
+% a look in `delaetex.cls' to see complete information on using, copying
+% and redistributing these files
+%
+\ProvidesFile{delaedipl-ecp.def}[2016/03/16 v2.0.0 DeLaeTeX Graduation Project in Computer Engineering]
+\newcommand{\titlepagespecificinfo}{\diplecpspecificinfo}
+\def\@approvalspecificinfo{\diplecpapproval}
+\def\coordname{\DELAEheadname}
+\def\coord{\nominataChefeDELAE}
+\course{\cgecp}
+\department{\delae}
+\department{\delae}

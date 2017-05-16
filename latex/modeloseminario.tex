@@ -1,0 +1,327 @@
+\documentclass{ppgeesa}
+
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage[american]{circuitikz}
+\usetikzlibrary{calc}
+\usepackage{amsmath}
+\usepackage{mathtools, cuted}
+
+\begin{document}
+
+\title{Modelagem em Espaço de Estados de um Alto-Falante e Rejeição de Perturbações de Sinal de Entrada}
+
+\author{Vicente Cunha\\
+{\small Universidade Federal do Rio Grande do Sul}\\}
+
+\maketitle
+\thispagestyle{empty}\pagestyle{empty}
+
+\begin{abstract}
+O modelo em espaço de estados é descrito para um alto-falante comum. Um controlador foi projetado para a rejeição de perturbações de sinal de entrada \textcolor{red}{TODO: concluir resumo com detalhes do projeto de controle e resultados}
+\end{abstract}
+
+\begin{IEEEkeywords}
+Alto-falante, espaço de estados, rejeição de perturbações
+\end{IEEEkeywords}
+
+\section{Introdução}
+
+Alto-falantes são transdutores eletromagnéticos utilizados para a conversão de sinais elétricos em sons \cite{beranek1954acoustics}. Trata-se de um sistema bem conhecido e de longa data, sendo que o princípio de operação de um transdutor de bobina móvel foi primeiramente descrito por Ernst W. Siemens em patente de 1874 \cite{siemens1874improvement}. Um dos primeiros usos relevantes deste tipo de transdutor para emissão de sinais sonoros foi o telefone, em patente de 1876 concedida a Alexander G. Bell \cite{graham1876improvement}. Nos dias atuais, alto-falantes são dispositivos amplamente difundidos, presentes em dispositivos como celulares, televisores e aparelhos auditivos, além de serem fundamentais para concertos musicais e a música contemporânea de forma geral.
+
+Neste trabalho, toma-se um modelo linear em espaço de estados para um alto-falante de radiação direta (i.e. a superfície vibratória do transdutor emite som diretamente ao ar, sem o acoplamento acústico de uma corneta). Este tipo de alto-falante foi concebido incialmente por Chester W. Rice e Edward W. Kellogg em 1925 \cite{rice1925notes}, sendo considerada a primeira versão dos alto-falantes contemporâneos \cite{bright2002active}.
+
+Um controlador foi projetado para rejeição de perturbações no sinal de entrada do sistema \textcolor{red}{TODO: concluir introdução, mais detalhes sobre o projeto de controle}.
+
+\section{Modelo do Alto-Falante}
+
+\subsection{Aspectos Construtivos}
+
+Fig. \ref{fig:speakerCross} apresenta a vista de corte de um alto-falante montado em uma superfície acusticamente defletora, conhecida por seu termo em inglês \textit{baffle}. Uma superfície vibrante conhecida como ``diafragma'' é conectada fisicamente a uma bobina imersa no campo magnético permanente de um ímã. O diafragma pode ser feito de diversos materiais, desde papel a ligas metálicas, sendo fixado por suspensões em suas extremidades externas e internas.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.7\columnwidth]{fig/corte.png}
+	\caption{Vista em corte indicando os elementos construtivos de um alto-falante. Fonte: adaptado de \cite{beranek1954acoustics}.}
+	\label{fig:speakerCross}
+\end{figure}
+
+O comportamento do alto-falante pode ser equacionado tomando-se a análise separada de seus aspectos eletromagnéticos (bobina imersa no campo magnético), mecânicos (suspensões e massa do diafragma) e acústicos (impedância de radiação e massa de ar movimentada) \cite{karsten2007compensation}.
+
+\subsection{Aspectos Eletromagnéticos}
+
+O circuito elétrico da Fig. \ref{fig:electric} representa a resistência e indutância da bobina do alto-falante ($R_b$ e $L_b$), uma fonte de sinal com respectiva resistência de saída ($v_s$ e $R_s$) e uma queda de tensão relacionada à força contra-eletromotriz ($Blu_d$, onde $B$ é a densidade de campo magnético do ímã permanente em webers por metro quadrado, $l$ é o comprimento da bobina imerso no campo magnético e $u_d$ é a velocidade do diafragma). É prática comum o uso de filtro passivo entre a fonte de sinal e o alto-falante, inserido neste modelo como um par RC ($R_f$ e $C_f$).
+
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz} 
+		\draw (0,2) to[american voltage source = $v_s$] (0,0);
+		\draw (0,2) to[R = $R_s$] (2,2) to[R = $R_f$] (4,2) to[R = $R_b$] (6,2) to[L = $L_b$,i=$i_b$] (8,2);
+		\draw (4,2) to[C = $C_f$,*-*] (4,0);
+		\draw (8,2) to[american controlled voltage source, l_=$Blu_d$] (8,0) -- (4,0) -- (0,0);
+	\end{circuitikz}
+	\caption{Circuito que modela os aspectos eletromagnéticos do sistema.}
+	\label{fig:electric}
+\end{figure}
+
+\subsection{Aspectos Mecânicos e Acústicos}
+
+Fig. \ref{fig:mechanical} representa um sistema massa-mola análogo ao sistema mecânico de um alto-falante, onde $x_d$ é o deslocamento do diafragma com relação à sua posição de repouso. A força eletromotriz $f_{em}$ é dada pelo produto $\Phi_0i_b$, onde $i_b$ é a corrente na bobina e $\Phi_0 = Bl$. As características de resistência e conformidade mecânica das suspensões do diafragma são modeladas por $R_d$ e $C_d$, respectivamente. $m_d$ é a massa total do diafragma e da bobina. A impedância generalizada $Z$ representa a carga acústica do alto-falante.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{fig/massa.png}
+	\caption{Sistema massa-mola análogo ao sistema mecânico de um alto-falante. Fonte: adaptado de \cite{bright2002active}.}
+	\label{fig:mechanical}
+\end{figure}
+
+O circuito elétrico da Fig. \ref{fig:mechCircuit} é análogo ao sistema da Fig. \ref{fig:mechanical}, no qual a velocidade de diafragma $u_d$ é considerada uma tensão elétrica e forças atuantes no sistema são correntes.
+
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz} 
+		\draw (0,0) to[american controlled current source = $\Phi_0i_b$] (0,2);
+		\draw (2,2) to[C = $M_d$,v=$u_d$,*-*] (2,0);
+		\draw (4,2) to[R = $\frac{1}{R_d}$,*-*] (4,0);
+		\draw (6,2) to[L = $C_d$,*-*] (6,0);
+		\draw (8,2) to[generic, l_=$\frac{1}{Z}$] (8,0);
+		\draw (0,2) -- (8,2);
+		\draw (0,0) -- (8,0);
+	\end{circuitikz}
+	\caption{Circuito que modela os aspectos mecânicos e acústicos do sistema, onde forças são representadas por correntes e velocidades por tensões.}
+	\label{fig:mechCircuit}
+\end{figure}
+
+\subsection{Modelo Completo}
+
+A combinação dos circuitos das Figs. \ref{fig:electric} e \ref{fig:mechCircuit}, substituindo as fontes dependentes por um transformador ideal, resulta no circuito da Fig. \ref{fig:complete}. O lado esquerdo do transformador representa os aspectos eletromagnéticos do sistema, enquanto o lado direito representa os aspectos mecânicos e acústicos. A Fig. \ref{fig:mecRef} apresenta o circuito equivalente, onde as quantidades eletromagnéticas do lado esquerdo foram referenciadas ao lado direito do transformador.
+
+\begin{figure*}[ht]
+	\centering
+	\begin{circuitikz} 
+		\draw (0,2) to[american voltage source,l_=$v_s$] (0,0);
+		\draw (0,2) to[R=$R_s+R_f$] (2,2) to[R=$R_b$] (4,2) to[L=$L_b$,i=$i_b$] (6,2);
+		\draw (7,2) node[transformer](T){};
+		\draw (T.base) node[above]{$\Phi_0:1$};
+		\node (C) at ([xshift=-3.95cm]T.A2) {};
+		\draw (0,0) |- (T.A2);
+		\draw (C) to[C=$C_f$,*-*] (2,2);
+		\node (D) at ([xshift=0.95cm]T.B2) {};
+		\node (E) at ([xshift=2.95cm]T.B2) {};
+		\node (F) at ([xshift=4.95cm]T.B2) {};
+		\node (G) at ([xshift=6.95cm]T.B2) {};
+		\node (H) at ([xshift=7.1cm]T.B2) {};
+		\draw (9,2) to[C=$M_d$,v=$u_d$,*-*] (D);
+		\draw (11,2) to[R=$\frac{1}{R_d}$,*-*] (E);
+		\draw (13,2) to[L=$C_d$,*-*] (F);
+		\draw (15,2) to[generic,l=$\frac{1}{Z}$] (G);
+		\draw (T.B1) -- (15,2);
+		\draw (T.B2) -- (H);
+	\end{circuitikz}
+	\caption{Circuito para o modelo completo de um alto-falante com filtro passivo RC.}
+	\label{fig:complete}
+\end{figure*}
+
+\begin{figure*}[ht]
+	\centering
+	\begin{circuitikz} 
+		\draw (0,2) to[american voltage source,l_=$\frac{v_s}{\Phi_0}$] (0,0);
+		\draw (0,2) to[R=$\frac{R_s + R_f}{\Phi_0^2}$] (2,2)
+					to[R=$\frac{R_b}{\Phi_0^2}$] (3.5,2)
+					to[L,l_=$\frac{L_b}{\Phi_0^2}$,i=$f_{em}$] (6,2);
+		\draw (2,2) to[C=$C_f\Phi_0^2$,*-*] (2,0);
+		\draw (6,2) to[C=$M_d$,v=$u_d$,*-*] (6,0);
+		\draw (8,2) to[R=$\frac{1}{R_d}$,*-*] (8,0);
+		\draw (10,2) to[L=$C_d$,*-*] (10,0);
+		\draw (12,2) to[generic,l=$\frac{1}{Z}$] (12,0);
+		\draw (6,2) -- (12,2);
+		\draw (0,0) -- (12,0);
+	\end{circuitikz}
+	\caption{Circuito equivalente, referenciado ao lado mecânico/acústico. Forças são representadas por correntes e velocidades por tensões.}
+	\label{fig:mecRef}
+\end{figure*}
+
+O equivalente dual do circuito da Fig. \ref{fig:mecRef} é apresentado na Fig. \ref{fig:final}, obtido ao interpretar-se forças como tensões elétricas e velocidades como correntes. A impedância acústica total $Z$ pode ser aproximada por um indutor de valor $Z=5.34a^3\rho_0$, onde $a$ é o raio do diafragma e $\rho_0$ é a densidade do ar movimentado pelo diafragma, quando as seguintes condições são assumidas: \cite{beranek1954acoustics}
+
+\begin{itemize}
+	\item O comprimento do \textit{baffle} onde o alto-falante está montado é infinito. Isto significa que variações de pressão na parte dianteira do diafragma não afetam a pressão na parte traseira do diafragma, e vice-versa.
+	\item As frequências assumidas pelo sinal de áudio, $\omega$, são tais que $\omega a/c < 0.5$, onde $c$ é a velocidade do som no meio.
+	\item A parte imaginária (reatância) da impedância acústica é muito maior que sua parte real.
+\end{itemize}
+
+\begin{figure*}[ht]
+	\centering
+	\begin{circuitikz} 
+		\draw (-0.5,0) to[american current source=$\frac{v_s}{\Phi_0}$] (-0.5,2);
+		\draw (2,2) to[R,l_=$\frac{\Phi_0^2}{(R_s+R_f)}$,*-*] (2,0);
+		\draw (2,2) to[L=$C_f\Phi_0^2$,i=$u_f$] (4,2);
+		\draw (4,2) to[R,l_=$\frac{\Phi_0^2}{R_b}$,*-*] (4,0);
+		\draw (6,2) to[C=$\frac{L_b}{\Phi_0^2}$,v=$f_{em}$,*-*] (6,0);
+		\draw (6,2) to[L=$M_d$,i=$u_d$] (8,2) to[R=$R_d$] (10,2) to[C=$C_d$,v=$f_d$] (12,2) to[L=$5.34a^3/\rho_0$] (12,0) -- (-0.5,0);
+		\draw (-0.5,2) -- (2,2);
+		\draw (4,2) -- (6,2);
+	\end{circuitikz}
+	\caption{Circuito equivalente dual, onde forças são representadas por tensões e velocidades por correntes.}
+	\label{fig:final}
+\end{figure*}
+
+\subsection{Espaço de Estados e Exemplo de Sistema}
+
+As equações do modelo de espaço de estados são apresentadas em (\ref{eq:stateSpace}), onde o vetor de estados $\textbf{x}$ é dado por (\ref{eq:stateVector}), onde $u_d$ é a velocidade de deslocamento do diafragma, $u_f$ é uma grandeza com dimensão de velocidade relacionada ao capacitor de filtro, $f_d$ é uma força relacionada à conformidade mecânica das suspensões do alto-falante e $f_{em}$ é a força eletromagnética produzida pela corrente na bobina. A saída do sistema, $y$, é considerada como a velocidade de deslocamento do diafragma $u_d$.
+
+\begin{align}
+	\label{eq:stateSpace}
+	\dot{\textbf{x}} = A\textbf{x} + Bv_s \\ \nonumber
+	y = \begin{bmatrix}
+	1 & 0 & 0 & 0
+	\end{bmatrix}\textbf{x}
+\end{align}
+
+\begin{equation}
+	\label{eq:stateVector}
+	\textbf{x} = \begin{bmatrix}
+		u_d & u_f & f_d & f_{em}
+	\end{bmatrix}^T
+\end{equation}
+
+As equações para derivadas de estados (\ref{eq:state1}), (\ref{eq:state2}), (\ref{eq:state3}) e (\ref{eq:state4}) são obtidas a partir da análise do circuito da Fig. \ref{fig:final}. A Tabela \ref{tab:parameters} apresenta parâmetros físicos associados ao modelo de um alto-falante comum, tomados de um exemplo contido em \cite{beranek1954acoustics}. 
+
+\begin{equation}
+\label{eq:state1}
+	\frac{d}{dt}u_d = \frac{1}{M_d + 5.34a^3/\rho_0}\left(-R_du_d - f_d + f_{em}\right)
+\end{equation}
+
+\begin{equation}
+\label{eq:state2}
+	\frac{d}{dt}u_f = \frac{1}{C_f\Phi_0^2}\left(\frac{\Phi_0v_s}{R_s+R_f} - \frac{\Phi_0^2}{R_s+R_f}u_f - f_{em}\right)
+\end{equation}
+
+\begin{equation}
+\label{eq:state3}
+	\frac{d}{dt}f_d = \frac{u_d}{C_d}
+\end{equation}
+
+\begin{equation}
+\label{eq:state4}
+	\frac{d}{dt}f_{em} = \frac{\Phi_0^2}{L_b}\left(-u_d + u_f - \frac{R_b}{\Phi_0^2}f_{em}\right)
+\end{equation}
+
+\begin{table}[h]
+	\centering
+	\caption{Parâmetros de exemplo de um alto-falante comum}
+	\begin{tabular}{c|c}
+		Parâmetro & Valor \\
+		\hline
+		$\Phi_0$ & 9 \textit{Wb/m} \\
+		$L_b$ & 700 $\mu H$ \\
+		$R_b$ & 8 ohms \\
+		$R_s$ & 2 ohms \\
+		$a$ & 0.13 \textit{m} \\
+		$\rho_0$ & 1.18 \textit{kg/m$^3$} \\
+		$c$ & 344.8 \textit{m/s} \\
+		$M_d$ & 0.011 \textit{kg} \\
+		$R_d$ & 0.5 \textit{Ns/m} \\
+		$C_d$ & 179 $\mu$\textit{m/N} \\		
+	\end{tabular}
+	\label{tab:parameters}
+\end{table}
+
+Os valores de componentes do filtro passivo ($R_f$ e $C_f$) foram calculados tendo em mente a restrição utilizada para a aproximação de impedância acústica - a frequência do sinal é tal que $\omega a/c < 0.5$. É sensata a escolha de um filtro com frequência uma oitava abaixo (i.e. metade do valor) da frequência máxima segundo esta restrição, como dado em (\ref{eq:filterCalc}), de modo a evitar que o comportamento da carga acústica do alto-falante não desvie significativamente das aproximações realizadas.
+
+\begin{equation}
+	\frac{1}{4\pi R_fC_f}\frac{a}{c} = 0.5
+	\label{eq:filterCalc}
+\end{equation}
+
+Determinando um valor de capacitor de filtro $C_f = 100nF$, a resistência de filtro calculada vale aproximadamente $R_f = 600\Omega$. A frequência de corte associada à estes valores é aproximadamente $\omega_c = 2653$ rad/s, ou $f_c = 422.2$ Hz. As matrizes de de espaços de estado $A$ e $B$ de (\ref{eq:matrixA}) e (\ref{eq:matrixB}) são obtidas substituindo os valores de parâmetros da Tabela \ref{tab:parameters} e do filtro calculado nas equações (\ref{eq:state1}), (\ref{eq:state2}), (\ref{eq:state3}) e (\ref{eq:state4}).
+
+\begin{equation}
+	\label{eq:matrixA}
+	A = \begin{bmatrix}
+		-23.875 & 0 & -47.750 & 47.750 \\
+		0 & -16611 & 0 & -123457 \\
+		5587 & 0 & 0 & 0 \\
+		-115714 & 115714 & 0 & 11429 \\
+	\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+	\label{eq:matrixB}
+	B = \begin{bmatrix}
+		0 & 1846 & 0 & 0
+	\end{bmatrix}^T
+\end{equation}
+
+A função de transferência $H(s)$ para as equações de espaço de estados de (\ref{eq:stateSpace}) que relaciona velocidade de deslocamento do diafragma e tensão de entrada pode ser obtida utilizando (\ref{eq:stateToTransfer}). A função de transferência resultante para as matrizes $A$ e $B$ de (\ref{eq:matrixA}) e (\ref{eq:matrixB}) é dada em (\ref{eq:transfer}).
+
+\begin{equation}
+	\label{eq:stateToTransfer}
+	H(s) = \frac{Y(s)}{V_s(s)} = \begin{bmatrix}
+		1 & 0 & 0 & 0
+	\end{bmatrix}(sI - A)^{-1}B
+\end{equation}
+
+\begin{strip}
+\begin{equation}
+	\label{eq:transfer}
+	H(s) = \frac{1.02\times 10^{10}s}{s^4 + 2.806\times 10^{4} s^3 + 1.448\times 10^{10} s^2 + 4.449\times 10^{11} s + 3.862\times 10^{15}}
+\end{equation}
+\end{strip}
+
+Os polos e zeros da função de transferência $H(s)$ são dados em (\ref{eq:pz}). Percebe-se que o par de polos $p_1$ e $p_2$ apresentam módulo muito maior que o par de polos $p_3$ e $p_4$.
+
+\begin{align}
+\label{eq:pz}
+	& p_1 = -14017 + j\times 119520 \\ \nonumber
+	& p_2 = -14017 - j\times 119520 \\ \nonumber
+	& p_3 = -15.102 + j\times 516.19 \\ \nonumber
+	& p_4 = -15.102 - j\times 516.19 \\ \nonumber
+	& z_1 = 0
+\end{align}
+
+A Fig. \ref{fig:step} mostra o resultado de simulação de regime transitório da velocidade do diafragma $u_d$ quando o sinal de entrada $v_s$ é um degrau unitário. O diagrama de Bode do sistema do alto-falante é apresentado na Fig. \ref{fig:bode}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{fig/step.eps}
+	\caption{Simulação de regime transitório da saída quando a entrada é um degrau unitário de tensão, com tempo de estabilização indicado.}
+	\label{fig:step}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{fig/bode.eps}
+	\caption{Diagrama de bode do sistema com picos de ressonância indicados.}
+	\label{fig:bode}
+\end{figure}
+
+A matriz $P$ composta pelos autovetores de $A$, dada em (\ref{eq:pMatrix}), pode ser utilizada de acordo com para obter a matriz diagonal $\bar{A} = PAP^{-1}$, similar a $A$, dada em (\ref{eq:similar}).
+
+\begin{strip}
+\begin{equation}
+	\label{eq:pMatrix}
+	P = \begin{bmatrix}
+	-0.0003 & -0.003 & -0.0027 + j\times 0.0916 & -0.0027 - j\times 0.0916 \\
+	0.7184 & 0.7184 & -0.0026 + j\times 0.904 & -0.0026 - j\times 0.0904 \\
+	0 & 0 & 0.9916 & 0.9916 \\
+	-0.0151 - j\times 0.6955 & -0.0151 + j\times 0.6955 & 0.0007 - j\times 0.0121 & 0.0007 + j\times 0.0121 \\
+	\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+	\label{eq:similar}
+	\bar{A} = \begin{bmatrix}
+	-14017 + j\times 119520 & 0 & 0 & 0 \\
+	0 & -14017 - j\times 119520 & 0 & 0 \\
+	0 & 0 & -15.102 + j\times 516.19 & 0 \\
+	0 & 0 & 0 & -15.102 - j\times 516.19 \\
+	\end{bmatrix}
+\end{equation}
+\end{strip}
+
+\bibliographystyle{IEEEtran}
+\bibliography{modelo}
+
+\end{document}
+

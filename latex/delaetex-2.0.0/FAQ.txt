@@ -1,0 +1,305 @@
+			DeLaeTeX FAQ
+
+===============================================================================
+Q1 - A primeira palavra-chave aparece com a inicial em maiuscula no resumo
+em portugues e nao aparece com a incial em maiuscula no resumo em ingles.
+
+A1 - Isto ocorre porque as palavras-chave no idioma principal (por default,
+portugues) sao inseridas individualmente atraves do comando \keyword{},
+enquanto as palavras-chave no idioma secundario sao inseridas todas em
+conjunto atraves de um parametro no ambiente englishabstract. Assim, as
+palavras-chave no idioma principal devem ser inseridas todas em letras
+minusculas atraves do comando \keyword{}, enquanto as palavras-chave no
+idioma secundario devem ser inseridas como parametro do ambiente
+englishabstract com a primeira letra da primeira palavra chave em letra
+maiuscula.
+
+===============================================================================
+Q2 - O resumo em ingles aparece com o titulo "RESUMO" e nao "ABSTRACT", como
+eu imagino que deveria ocorrer.
+
+A2 - Isto ocorre porque a distribuicao do LaTex esta' configurada com a
+hifenizacao para portugues desabilitada. Execute o programa de configuracao
+do TeX e habilite a hifenizacao para portugues.
+
+Se a distribuicao for a teTeX, execute o programa texconfig, selecione a
+opcao HYPHEN, a seguir selecione latex.  Na janela de edicao que surgira',
+remova o comentario da linha portuges.  Saia do editor (se for o vi, digite
+ESC : q) e selecione EXIT para sair do texconfig.
+
+Outra opcao e' editar diretamente o arquivo de configuracao, que normalmente
+esta' em /usr/share/texmf/tex/generic/config/language.dat.
+
+===============================================================================
+Q3 - Nao sei como seria o equivalente do \citeasnoun{} do pacote Harvard
+para o DeLaeTeX. Estou usando \citet{} mas quando se tem mais do que um
+autor, ele cita TODOS ao inves de usar et al. Tambem nao sei se esta'
+correto os nomes de autores aparecerem com todas as letras em maiuscula
+quando citados "inline".
+
+A3 - O formato padronizado pelo PPGEE, baseado na ABNT NBR 6023, preve que
+quando existirem ate' 3 autores, citam-se os sobrenomes em letras
+maiusculas, separando os nomes por ";". Apenas a partir de 4 autores, e' que
+cita-se apenas o sobrenome do primeiro autor, seguido de "et al.". O
+\citet{} e' realmente o equivalente ao \citeasnoun{} do pacote Harvard e
+obedece ao formato adotado pelo PPGEE. Provavelmente o teste que gerou estas
+questao foi feito com menos de 4 autores. 
+
+===============================================================================
+Q4 - Nao sei bem por qual motivo algumas expressoes do tipo $blabla$ tendem a
+vazar invadindo as margens ao inves de serem quebradas ou irem para a
+proxima linha do texto.
+
+A4 - Ainda nao foi determinado se isto e' um problema do pacote DeLaeTeX ou
+um problema do LaTeX em si'. Exemplos demonstrando o problema sao bem
+vindos. Muitas vezes incluir o pacote ae resolve esse problema.
+
+===============================================================================
+Q5 - O checklist do PPGEE usa palavras fortes, como "EXATAMENTE IGUAL" e ao
+mesmo tempo em outros casos faz definicoes muito ambiguas como "MARGENS
+ENTRE 2 E 4cm".
+
+A5 - Isto nao e' uma definicao ambigua. E' uma definicao flexivel. Qualquer
+coisa entre 2 e 4 cm e' aceita. 4.1 cm ou 1.9 cm nao sao aceitos de forma
+alguma. A ideia e' esta: Se a dissertacao tiver em desacordo com o checklist
+nao sera' homologada de jeito nenhum. Justamente por isto o checklist nao e'
+muito rigido nas especificacoes, mas a verificacao sera' rigida
+
+===============================================================================
+Q6 - No modelo do PPGEE, na pagina do resumo le-se "palavras-chaves" no
+modelo e "palavras-chave" na pagina gerada pelo DeLaeTeX.
+
+A6 - Palavras-chaves esta' incorreto. Certamente as normas de uso correto do
+idioma tem precedencia sobre as normas do PPGEE.
+
+===============================================================================
+Q7 - No modelo do PPGEE, os subitens do tipo "X.X" estao em caixa alta, com
+a primeira letra ligeiramente maior em cada palavra, enquanto que o formato
+gerado pelo DeLaeTeX estah diferente.
+
+A7 - E' um efeito chamado small-caps. As letras minusculas sao iguais as
+maiusculas mas um pouco menores. Mas o proprio modelo do PPGEE e'
+incoerente, pois no sumario os itens do tipo X.X nao aparecem desta forma.
+Como o checklist nao obriga que isto seja utilizado, o DeLaeTeX nao adota
+esta formatacao.
+
+===============================================================================
+Q8 - No sumario do modelo do PPGEE os itens sao unidos aos numeros por
+pontilhados sempre de mesma espessura, independende do tamanho da letra,
+enquanto que pelo sumario gerado no DeLaeTeX os pontinhos parecem variar em
+tamanho e espacamento conforme o tamanho da fonte do titulo em questao.
+
+A8 - E' verdade, mas o checklist nao obriga nenhum formato em particular
+para o sumario, lista de figuras, tabelas e abreviaturas, portanto, as
+formas implementadas no DeLaeTeX sao perfeitamente validas.
+
+===============================================================================
+Q9 - Na lista de figuras aparece algo do tipo "Figura X blablabla ... Y"  no
+modelo do PPGEE, enquanto que a lista gerada pelo DeLaeTeX mostra "Figura X:
+blablabla ... Y". Idem para a lista de tabelas. Em contrapartida, no modelo
+do PPGEE, a lista de abreviaturas utiliza ":" entre a abreviatura e o
+significado e na lista gerada pelo DeLaeTeX nao se usa este ":". Ainda nas
+abreviaturas, no modelo do PPGEE, nao existe alinhamento de tabulacao para
+as descricoes das abreviaturas, enquanto que na lista gerada pelo DeLaeTeX
+sim.
+
+A9 - vide A8.
+
+===============================================================================
+Q10 - No item 11 do checklist do PPGEE, le-se que o tamanho da fonte deve
+ser de 12 a 20... e espacamento de simples a duplo... muito vago!
+
+A10 - Qualquer coisa entre 12 e 20 pt e' valido. A especificacao esta'
+incorreta no sentido de que nao menciona a unidade (pt). No mais, e' apenas
+uma especificacao flexivel.
+
+===============================================================================
+Q11 - O item 13 do checklist do PPGEE le-se: "todas as margens devem medir
+entre 2 e 4cm"! Seria mais apropriado definir de maneira univoca o tamanho
+das margens.
+
+A11 - Novamente, e' apenas uma especificacao flexivel. Qualquer coisa entre
+2 e 4cm e' aceita. A finalidade do checklist nao e' criar um formato rigido,
+mas evitar extremos.
+
+===============================================================================
+Q12 - No item 14 do checklist do PPGEE le-se que a numeracao deve estar no
+canto superior direito das paginas. Mas nas paginas da esquerda, o modelo
+gera numeracao no canto superior esquerdo.
+
+A12 - A especificacao de numeracao no canto superior das paginas e' feita
+com base na suposicao de que as folhas serao impressas em apenas uma face. O
+default do DeLaeTex e' gerar o texto para ser impresso em frente e verso.
+Neste caso, o mais apropriado e' que a numeracao das paginas que serao
+impressas no verso da folha fique no canto superior esquerdo.
+
+Pode-se gerar o texto para ser impresso apenas na frente das folhas
+utilizando-se a opcao "oneside" no comando "\documentclass".
+
+No entanto, a versao final sera' impressa pela grafica em frente e verso. Se
+a versao eletronica for gerada apenas para um lado da pagina vai ficar
+diferente da versao impressa, que e' a oficial.
+
+===============================================================================
+Q13 - O checklist do PPGEE nao comenta se a dissertacao deve ser impressa em
+frente-verso ou nao.
+
+A13 - E' uma falha. Implicitamente existe a suposicao de que sera' em uma
+face apenas, devido a exigencia de numeracao no canto superior direito. Isto
+tambem e' o especificado pela ABNT. No entanto, a versao impressa pela
+grafica sera' em frente e verso. Assim, parece mais coerente fazer tudo em
+frente e verso. E' dificil justificar a geracao do documento eletronico em
+forma diferente do oficial que e' o feito pela grafica.
+
+===============================================================================
+Q14 - O checklist do PPGEE nao recomenda utilizacao de ":" para separar as
+descricoes das figuras enquanto que o DeLaeTeX o faz.
+
+A14 - Tambem nao proibe, nem exige qualquer outra coisa. Portanto, a forma
+implementada pelo DeLaeTeX e' valida.
+
+===============================================================================
+Q15 - O checklist do PPGEE tambem e' muito vago para tabelas.
+
+A15 - Se o checklist e' omisso, qualquer forma implementada e' valida.
+
+===============================================================================
+Q16 - Estou usando o DeLaeTeX para editar meu TI e nao entendi uma coisa:
+existe um numero de TI. Que numero eh esse? E' um numero especifico pra cada
+aluno?
+
+A16 - Nao e' uma numeracao dos trabalhos, mas a numeracao da disciplina.
+Existe a disciplina TI-I e a discipina TI-II. Assim, quem fizer doutorado
+pode fazer TI-I no mestrado e TI-II no doutorado. Note que atualmente não
+existem mais disciplians de TI no PPGEE.
+
+===============================================================================
+Q17 - Estou usando o DeLaeTeX para fazer apresentacoes e o pacote subfigure
+para colocar mais de uma figura no mesmo slide. No entanto, a numeracao
+(letras) nos captions das subfiguras nao inicia do (a) a cada slide, como
+seria esperado.
+
+A17 - Provavelmente isto esta' ocorrendo porque, embora cada subfigura tenha
+um caption, nao esta' sendo utilizado caption para a figura toda. Uma forma
+de contornar este problema mesmo sem colocar um caption na figura, e'
+utilizar o comando \setcounter{subfigure}{0} antes do primeiro comando
+\subfigure em cada slide.
+
+===============================================================================
+Q18 - Não estou conseguindo compilar o seminário de andamento usando o
+DeLaeTeX pois ele não reconhece um comando chamado
+
+\centerfigcaptionstrue
+
+Alguma orientação sobre o que devo fazer?
+
+A18 - Isto esta' ocorrendo porque a versao do DeLaeTeX e' anterior a versao
+1.3.0 e a versao do IEEEtran e' 1.7 ou posterior. A solucao e' atualizar o
+DeLaeTeX para a versao 1.3.0 ou posterior ou "desatualizar" a versao do
+IEEEtran para a versao 1.6c.
+
+===============================================================================
+Q19 - Em referências com mais de três autores, deve-se utilizar a
+abreviatura et.  al..  Por ser uma expressão em outro idioma não deveria ser
+em itálico?
+
+A19 - Segundo o item 8.1.1.1 da NBR 6023, o et. al. não deve ser em itálico.
+
+===============================================================================
+Q20 - Conversando com um colegas escreventes de dissertação, um deles me
+disse que no DeLaeTeX há uma modificação para uso do \cite e \citep.  Esse
+aluno disse que teve de por uma "relaxação" (não lembro o nome do comando)
+para se poder usar o \cite e o \citep como definidos antes das definições do
+DeLaeTex.
+
+A20 - Se o aluno colocou uma relaxação para usar o \cite e \citep, fez bobagem!
+
+O comando \cite é um comando tradicional do LaTeX, existente por exemplo
+nos estilos book e report, que sã básicos do LaTeX. Este comando, quando
+usado com um estilo de bibliografia que cita por autor e data, como o
+adotado pelo PPGEE, faz citações na forma (Lages, 2016).
+
+O DeLaeTeX usa o pacote natbib para formatar as referências. Este pacote
+define os comandos \citep, que faz citações na forma (Lages, 2016) e \citet,
+que faz citações na forma Lages (2016), além de outros comandos para outros
+formatos de citação.
+
+O natbib também (re-)define o comando \cite, mas para fazer citações na
+forma Lages (2016), ao contrário do formato tradicional do LaTeX.
+Provavelmente isso foi feito porque o natbib foi criado para ser usado nas
+Ciências Naturais, onde é muito mais comum fazer citações explícitas do que
+em Engenharia. Ainda assim, o natbib considera o uso do seu comando \cite
+como deprecated e recomenda usar \citet.
+
+O que foi feito no DeLaeTex foi simplesmente fazer com que o \cite voltasse a
+citar na forma tradicional do LaTex, ou seja, na forma (Lages, 2016) porque
+assim fica mais fácil para "portar" textos escritos usando os estilos
+tradicionais do LaTex e a maioria dos outros estilos.
+
+Note que isso não representa restrição alguma, pois se for necessário fazer
+uma citacao na forma Lages (2016), basta usar o comando \citet.
+
+Ou seja, o erro e' o aluno querer usar \cite e \citep, quando deveria usar
+\citet e \cite ou \citet e \citep.
+
+===============================================================================
+Q21 - Haveria uma variação do \cite para que eu posas citar sem o parênteses?
+
+A21 - Basta usar o comando \citet. Vide Q20 para mais detalhes sobre este
+assunto.
+
+===============================================================================
+Q22 - Em algums referências aparece o texto "Anais...", não sei como sumir
+com ele, e ele aparece como norma da ABNT.  Isso eu realmente não entendi. 
+Pedi ajuda para os colegas mas eles também não sabem muito sobre.  Inclusive
+estão nas demais dissertações.
+
+A22 - O texto "Anais..." ou "Proceedings..." são colocados automaticamante
+onde devem ser, mas para isso os campos no .bib tem que ser preechidos
+corretamente, em especial o campo booktitle da macro @inproceedings.
+
+Se o evento for internacional, o campo deve comecar com "Proceedings of".
+
+Se o evento for nacional, o campo deve comecar com "Anais do"
+
+===============================================================================
+Q23 - Estou querendo citar um artigo cujo um dos autores é o prof. João
+Manoel Gomes da Silva Jr.  Se no .bib faço o campo author="Jo{\~a}o Manoel
+{GOMES DA SILVA JR.}", a referência fica sempre em letras maiúsculas, mesmo
+quando o estilo usa letras minúsculas.  Se faço author="Jo{\~a}o Manoel
+{Gomes da Silva Jr.}", a referência fica sempre em letras minúsculas, mesmo
+quando o estilo usa letras maiúsculas.
+
+A23 - O correto é colocar assim:
+
+author="Jo{\~a}o Manoel Gomes{~}da{~}Silva{~}Jr."
+
+e aí o BiBTeX converte para letras maiúsculas ou minúsculas conforme o estilo.
+
+===============================================================================
+Q24 - Estou gerando o pdf com o verso de algumas páginas em branco e
+alternando o lado do número da página, está errado?  A dissertação de um
+colega está diferente, sem páginas em branco e com os números sempre do
+mesmo lado da página.  Qual seria a forma correta de gerar o pdf?
+
+A24 - As  duas formas estao corretas, depende do objetivo.
+
+A forma como está a tua dissertação é para impressão em frente e verso e é
+selecionada quando se usa a opcao openright no \documentclass.
+
+A forma como está a dissertação do seu colega é para impressão somente em
+frente e é selecionada quando se usa a opcao oneside no \documentclass.
+
+Note que a numeração das páginas, não só a posição dos números, é diferente
+em um caso e no outro, devido à inclusão dos versos em branco em algumas
+páginas.
+
+A gráfica da UFRGS vai produzir as cópias da versão final em frente e verso,
+portanto é mais adequado usar frente e verso desde agora.  Além de poupar
+papel faz, com que os números das páginas na versão pdf fiquem consistentes
+com os da versão impressa pela gráfica.
+
+Porém, há quem prefira que as versões preliminares sejam impressas só em
+frente, para que o verso das folhas possa ser usado para anotações.
+
+===============================================================================

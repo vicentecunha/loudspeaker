@@ -1,0 +1,16 @@
+% delaeti.def - Individual Studies definitions
+% Copyright (C) 2004..2016 Walter Fetter Lages <fetter@ece.ufrgs.br>
+%
+% This file was adapted from the similar one in iiufrgs-4.2.0 package.
+%
+% This is free software, distributed under the GNU GPL; please take
+% a look in `delaetex.cls' to see complete information on using, copying
+% and redistributing these files
+%
+\ProvidesFile{delaeti.def}[2016/03/16 v2.0.0 DeLaeTeX Individual Studies]
+\newcommand{\ti}[2][]{
+	\gdef\@tinumber{#2}
+	\gdef\@tirelease{#1}
+}
+\newcommand{\titlepagespecificinfo}{\tispecificinfo}
+\course{\ppgee}
